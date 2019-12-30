@@ -1,0 +1,23 @@
+{
+  "name": "babel-setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir build",
+    "start": "babel-node src/main.js",
+    "watch": "nodemon --exec babel-node src/main.js",
+    "build-watch": "npm run build && nodemon build/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "child-process-promise": "^2.2.1"
+  },
+  "dependencies": {
+    "@babel/node": "^7.7.7"
+  }
+}
