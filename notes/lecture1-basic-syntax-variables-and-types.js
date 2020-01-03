@@ -55,6 +55,8 @@ null // null literal
 080 // number 타입의 literal (octal)
 0x2F // number 타입의 literal (hexadecimal)
 0b0001010 // number 타입의 literal (binary)
+Infinity // number 타입의 literal; 양의 무한대를 의미함. (0 으로 다른 number 을 나눈 경우에 결과값으로 리턴됨.)
+NaN // number 타입의 literal; Not-A-Number 의 약자로, number 와 number 타입이 아닌 값을 연산한 경우 얻을 수 있음. (결과 값이 number 가 아니라는 뜻.)
 
 /*
     3. Variable (변수)
@@ -162,7 +164,7 @@ var a1, a2 = 30, a3 = "hello";
 */
 
 /*
-    5. Data types
+    5. Data types (자료형)
     : 어떤 값(value) 혹은 데이터(data) 의 타입 혹은 형태로써, 해당 데이터가 메모리에서 어떤 structure 로 표현되어 있고,
      그 값이 어떤식으로 해석되어야 하는지를 알려줌.
 
@@ -257,6 +259,10 @@ var a1, a2 = 30, a3 = "hello";
          또한, key 는 quotes 로 감싸는 것도 가능하며, 주로 key 에 whitespace 가 있을 경우 이런 형태를 사용함.)
         (아예 property 가 하나도 없는 empty object 도 object 임.)
 
+            ** null
+            : 어떤 variable 이 어떠한 오브젝트도 가리키고 있지 않다는 것을 표현하는 object 타입의 리터럴. undefined 와 마찬가지로
+              Boolean 타입으로 변환시 false 로 평가됨.
+
         - array
         : 여러 개의 element(원소) 를 연속적인 메모리 공간에 선형으로 배열한 형태로써, "[]" 로 감싸서 표현하며,
          여러개의 element 가 있을 경우, "," 로 구분함.
@@ -269,11 +275,17 @@ var a1, a2 = 30, a3 = "hello";
         var bRunning = true;
 
         - undefined
-
-        - null
+        : 어떤 variable 에 값이 대입되지 않았다는 것을 표현하는 타입. Boolean 타입으로 변환시 false 로 평가됨.
 
     - data type 이 왜 필요한가?
-    : 
+    : data type 은 메모리 상에서 어떠한 정보가 저장 혹은 로드될 떄, 어떠한 크기를 가지고 어떤 구조로 표현 또는 해석되어야 하는지를 알려주는
+      역할을 하게됨. (데이터 타입 별 메모리 상의 표현 형태는 관련 노트 참조)
+      data type 이 존재하지 않을 경우, 메모리 공간의 특성상 연속적인 비트의 배열에서 얼마만큼의 비트를 어떤식으로 해석해야 되는지에 대해
+      심각한 모호성을 갖게 됨. 따라서, 어떤 프로그래밍 언어이든 data type 은 필수적인 존재임.
+
+      ** Javascript 와 data type
+      : javascript 에서는 data type 이 존재하지 않는게 아닌, 단순히 variable 이 저장하는 값에 따라 해당 variable 의 타입이 "유동적으로"
+        바뀔 수 있음. 따라서 javascript 에서도 data type 이 당연히 존재하며 정보를 표현하는 데에 있어 굉장히 중요한 역할을 함.
 */
 arr[3] = 5;
 arr[3].key = 5;
