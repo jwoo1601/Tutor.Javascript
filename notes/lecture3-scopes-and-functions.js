@@ -7,17 +7,48 @@
         : 어떤 scope 에도 속하지 않는, 제일 default scope 을 global scope 이라고 함.
 
         2. function scope
-        :
+        : 특정한 function 내에서 선언된 identifier 는 해당 function 안에서만 알려지게 됨.
+          즉, 해당 function 이 return 되면 선언된 identifier 는 사라짐. (외부에서 사용할 수 없음)
 
         3. block scope
-        :
+        : 특정한 코드 블럭 ({}) 내에서 선언된 identifier 들을 해당 block scope 에 속한다고 말함.
+          코드 블럭의 예시로는 for, if, switch-case, while 등이 있음.
 
         4. class scope
-        :
+        : Javascript 의 클래스 선언 내에서 사용되는 identifier 들은 해당 클래스의 class scope 에 속함.
 
     - shadowing
-    :
+    : 바깥 (outer) scope 에서 선언된 identifier 와 동일한 identifier 가 inner scope 에서 선언될 경우, outer scope 의 해당 identifier 를 가림.
+
+    - hoisting
+    : javascript 의 기본 동작으로, 선언 (declaration) 들을 현재 scope 의 제일 상단으로 옮기는 행위를 뜻함.
+      즉, declaration 들이 상단으로 옮겨지므로, 어떤 identifier 가 선언되기 전에 먼저 해당 identifier 를 사용 혹은 대입할 수 있음.
+      
+      - const/let vs var
+      : var 로 선언된 identifier 는 자동적으로 hoisting 됨. 반면에, let 혹은 const 로 선언된 identifier 는 hoisting 되지 않음.
+
+      - hoisting 의 문제점
+      : javascript 의 기본 동작인 hoisting 은 identifier 가 선언되기 전에 사용될 수 있게하므로, 코드를 짤 때 심각한 버그의 원인이 되기도 함.
+        따라서, hoisting 을 막기위해 var 보다는 let 혹은 const 를 가급적 사용하고, 항상 identifier 들을 사용되는 scope 의 최상단에 선언하도록 해야함.
 */
+
+let data = "abcdef";
+
+function getDataFromServer(param1, param2) {
+  let data = 50;
+
+  console.log(data);
+}
+
+console.log(ab);
+'use strict';
+
+
+abc = 300;
+
+console.log(abc); //300
+
+let abc;
 
 /*
     2. Functions (함수)
@@ -38,10 +69,29 @@
           <statements...>
       }
 
+      function addTwoElements(a, b) {
+        return a + b;
+      }
+
       let array = [ ];
-      function addNewItem(item1, item2) {
+      let n1 = new Number(5);
+      let n2 = 5;
+
+      let abc = function addNewItem(item1, item2) {
+        if (typeof item1 === 'number' || item1 instanceof Number) {
+          array.push(item * 10);
+        }
+
+        if (item2 === undefined) {
+          return;
+        }
+
         array.push(item1);
         array.push(item2);
+        array.push(3);
+
+        return 5;
+        ~~~~~~~
 
         let arr = [ ]
         arr.push(item1);
@@ -50,7 +100,27 @@
         }
       }
 
-      addNewItem('1', 2);
+      abc(5, 3);
+
+      const createNewEntry = function abc() {
+        
+      }
+
+      abc();
+
+      createNewEntry();
+
+      console.log(createNewEntry.name); // abc
+
+      let t = createNewEntry;
+
+      t();
+
+      t.name // 
+
+      let abc = addNewItem('1', 2);
+
+      addNewItem(5, 4);
 
     - function expression
     : javascript 에서 어떤 expression 내에서 function 을 선언하는 동시에 대입을 하는 형태.
@@ -107,7 +177,81 @@
     : 어떤 function 이 리턴하는 값의 타입 (type) 을 의미하며, Javascript 에서는 return type 을 명시하지 않음.
 
     6. Closures
+    : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
     7. lambda expression
-    () =>  
+    : 익명 함수를 선언할 때, function statement 형태로 적지 않고, 간단히 (parameters...) => { statements... } 형태로 표현할 수 있음.
+      즉, 아래 두 함수는 같은 표현:
+      function (a, b) {
+        return a + b;
+      }
+
+      (a, b) => a + b
+
+      ** 이 때, lambda function 의 parameter 가 하나일 경우, parameter 괄호 (parenthesis) 를 생략할 수 있음.
+      즉, (a) => a * 5 에서 괄호를 생략하고 a => a * 5 형태로 표현 가능.
+
+      ** lambda function 의 function body 가 하나의 return statement 만을 가지는 경우, function body 를 표시하는 코드 블럭과 return 키워드 없이
+      쓸 수 있음.
+      즉, a => { return a + 5; } 를 a => a + 5 와 같은 형태로 쓸 수 있음.
+
+      ** lambda expression 과 function statement 의 차이점:
+      this 키워드를 사용할 때, function statement 에서는 this 가 사용된 해당 function 자체를 가리키지만,
+      lambda function 에서는 해당 lambda function 이 아닌, 그 상위 scope 의 오브젝트를 가리키게 됨.
 */
+
+function connectToServer(serverAddress, callback) {
+  connect(serverAddress);
+
+  callback("Success");
+}
+
+add(1, 2); // a = 1, b = 2
+
+function add(a, b) {
+
+}
+
+function k() {
+  console.log('sdfs');
+}
+
+
+connectToServer('192.342.34.2', function (message) {
+  console.log(`Connected to server - message: ${message}`);
+});
+
+connectToServer('192.342.34.2', (message) => { // parameter () optional
+  console.log(`Connected to server - message: ${message}`);
+});
+
+connectToServer('192.342.34.2', message => { // parameter () optional
+  console.log(`Connected to server - message: ${message}`);
+})
+
+connectToServer('192.342.34.2', () => { // parameter () mandatory (필수)
+  console.log(`Connected to server`);
+})
+
+
+function doAction(a, b, fn) {
+  return fn(a, b);
+}
+
+function add(a, b) {
+  return a + b;
+}
+
+let result = doAction(3, 5, add);
+
+let result = doAction(3, 5, function (a, b) {
+  return a + b;
+}); // result = 8
+
+let result = doAction(3, 5, (a, b) => {
+  return a + b;
+})
+
+let result = doAction(3, 5, (a, b) => a + b);
+
+// connectToServer => serverAddress = '192.342.34.2', callback = function () { console.log~~ }
