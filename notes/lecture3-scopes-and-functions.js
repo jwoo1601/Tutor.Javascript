@@ -41,8 +41,7 @@ function getDataFromServer(param1, param2) {
 }
 
 console.log(ab);
-'use strict';
-
+("use strict");
 
 abc = 300;
 
@@ -200,58 +199,110 @@ let abc;
       lambda function 에서는 해당 lambda function 이 아닌, 그 상위 scope 의 오브젝트를 가리키게 됨.
 */
 
+/*
+    8. callback functions
+    : Javascript 에서는 함수 (function) 를 어떤 variable 에 대입하는게 가능하기 때문에 variable 이라고 볼 수 있는 parameter 에 함수를 전달하는 것도 가능하며,
+      리턴 값으로도 함수 자체를 줄 수 있음. (이 때, 전달되는 함수들은 function object 형태로 전달됨.)
+      이 메커니즘을 이용해 어떤 function 을 통해서 작업을 실행할 때, 주로 해당 작업이 언제 완료가 되는지 정확히 결정되지 않은경우,
+      임의의 function 을 parameter 로 전달해줌으로써 해당 작업이 완료된 후 parameter 로 전달된 function 이 호출되게 하는 패턴을 만들 수 있음.
+      이 때, 작업이 완료된 후 (혹은 에러가 났을 경우) 역으로 호출되는 function 들을 callback function (콜백 함수) 라고 부름.
+*/
+
+/*
+  예제: 주어진 주소를 이용해 어떤 서버에 연결하는 동작을 하는 함수가 있을 때, 일반적으로 networking 을 통한 통신은 변수가 많기에
+        해당 작업이 언제 완료되는지 시점을 특정하기 어려움. 따라서 일반적인 함수 호출 - 함수 실행 대기 - 완료 - 리턴 후 작업을 계속 진행하는
+        방식 (blocking) 보다는 기존 프로그램 로직을 가로막지 않고, 대신 parameter 로 callback 함수를 전달받아 해당 작업이 완료가 됬을 경우
+        callback 함수를 호출해 알려주는 패턴을 많이 사용함.
+*/
 function connectToServer(serverAddress, callback) {
-  connect(serverAddress);
+  const connectionStatus = nonBlockingConnect(serverAddress); // nonBlockingConnect 함수는 서버에 연결이 될때까지 기다리지 않고 연결 요청만 보낸 뒤 바로 리턴됨.
 
-  callback("Success");
+  // nonBlockingConnect 함수가 리턴한 값으로 현재 연결 여부를 알 수 있음.
+  if (connectionStatus.isConnected()) {
+    callback("Success"); // 연결 되었을 경우, 전달받은 callback 함수를 호출함.
+  }
 }
 
-add(1, 2); // a = 1, b = 2
-
-function add(a, b) {
-
-}
-
-function k() {
-  console.log('sdfs');
-}
-
-
-connectToServer('192.342.34.2', function (message) {
+// 아래는 callback 함수와 function expressions, lambda expression 들을 결합해 사용한 형태.
+connectToServer("192.342.34.2", function(message) {
   console.log(`Connected to server - message: ${message}`);
 });
 
-connectToServer('192.342.34.2', (message) => { // parameter () optional
+// 위에서 parameter 로 전달된 anonymous function 을 labmda expression 형태로 변환하면,
+connectToServer("192.342.34.2", message => {
+  // 파라미터 괄호 () 는 optional; 이유: parameter 가 하나이기 때문
   console.log(`Connected to server - message: ${message}`);
 });
 
-connectToServer('192.342.34.2', message => { // parameter () optional
-  console.log(`Connected to server - message: ${message}`);
-})
-
-connectToServer('192.342.34.2', () => { // parameter () mandatory (필수)
+connectToServer("192.342.34.2", () => {
+  // parameter 괄호 () 는 mandatory (필수); 이유: parameter 가 하나도 없기 때문
   console.log(`Connected to server`);
-})
-
+});
 
 function doAction(a, b, fn) {
-  return fn(a, b);
+  return fn(a, b); // 이 떄, fn 은 callback function
 }
 
 function add(a, b) {
   return a + b;
 }
 
-let result = doAction(3, 5, add);
-
-let result = doAction(3, 5, function (a, b) {
+// 아래 코드들은 전부 같은 동작을 함.
+let result;
+result = doAction(3, 5, add); // parameter 로 function statement (declaration) 을 전달함.
+result = doAction(3, 5, function(a, b) {
+  // parameter 로 anonymous function (즉, function expression) 을 전달함.
   return a + b;
-}); // result = 8
-
-let result = doAction(3, 5, (a, b) => {
+});
+result = doAction(3, 5, (a, b) => {
+  // parameter 로 lambda expression 을 전달함.
   return a + b;
-})
+});
+result = doAction(3, 5, (a, b) => a + b); // 좀 더 간략화된 lambda expression: function body 가 return statement 한 줄로만 구성되어 있을 경우 { } 와 return 을 생략가능.
 
-let result = doAction(3, 5, (a, b) => a + b);
+/*
+  9. Variadic functions
+  : function 의 parameter 로 알려지지 않은 갯수의 parameter 들을 전달받는 function 들을 뜻함.
+    즉, parameter 의 갯수가 function 이 선언될 때 정해지는게 아닌, function 이 호출될 때 정해짐.
 
-// connectToServer => serverAddress = '192.342.34.2', callback = function () { console.log~~ }
+    * Javascript 에서는 모든 function 들이 선언된 parameter 외에 extra parameter 를 전달받을 수 있음.
+*/
+
+function funcWithExtraParams(par1, par2, par3) {
+  return par1 + par2 + par3;
+}
+
+// funcWithExtraParams 함수를 호출할 때, 함수의 프로토타입에 나와있는 첫 3개의 파라미터 (par1, par2, par3) 외에
+// 추가적으로 2개를 더 전달함. 이 때, Javascript 에서는 이 동작이 오류가 나지 않음.
+funcWithExtraParams(1, " + ", 3, 5, 7);
+
+/*
+  - How to access extra parameters
+  : 프로토타입에 선언된 parameter 이외에 추가적으로 전달받은 parameter 들에 접근하는 방법은 2가지가 있음.
+
+    (1) Using arguments
+    : Javascript 에서 어떤 function 이 호출되었을 때, 기본적으로 따로 선언을 하지 않더라도 arguments 라는 variable 에 접근할 수 있음.
+      이 때, 이 variable 은 해당 function 이 전달받은 파라미터들의 array 라고 볼 수 있음.
+      (즉, 제일 첫번째 parameter 가 index 0 에 매핑되어 갯수에 상관없이 전달받은 parameter 들을 전부 담고 있음.)
+
+    (2) Using rest parameters
+    : 직접적으로 function 프로토타입에서 parameter 로써 명시해주며, ...<identifier> 형태를 이용함.
+      이 때, 해당 identifier 를 가지는 array 가 생성되며, 해당 array 는 그 이전에 명시된 parameter 들을 제외한
+      나머지 parameter 들을 순서대로 index 0 부터 매핑해 가지고 있음.
+*/
+
+function variadicFunc1(a, b, c) {
+  console.log(`a: ${a}, b: ${b}, c: ${c}`);
+
+  for (let i = 3; i < arguments.length; i++) {
+    console.log(`arguments[${i}]: ${arguments[i]}`);
+  }
+}
+
+function variadicFunc2(a, b, c, ...d) {
+  console.log(`a: ${a}, b: ${b}, c: ${c}`);
+
+  for (let i = 0; i < d.length; i++) {
+    console.log(`d[${i}]: ${d[i]}`);
+  }
+}

@@ -2,3 +2,4 @@ notes/_*.js
 test
 **/*.test.js
 **/node_modules
+activity2
