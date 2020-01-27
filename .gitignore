@@ -3,3 +3,4 @@ test
 **/*.test.js
 **/node_modules
 activity2
+qa/Archive.zip
