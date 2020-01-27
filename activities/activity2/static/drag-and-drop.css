@@ -1,0 +1,72 @@
+.box-list {
+    display: block;
+    float: left;
+
+    padding: 5px;
+    margin: 0;
+    margin-right: 100px;
+    border: 2px solid blue;
+
+    max-width: fit-content;
+
+    list-style-type: none;
+}
+
+.box-list li {
+    padding: 2px;
+    margin: 5px auto;
+    border: 2px solid red;
+
+    max-width: 100px;
+}
+
+.drag-box {
+    padding: 5px 10px;
+    margin: 0;
+    border: 2px solid green;
+
+    color: white;
+    background-color: green;
+
+    text-align: center;
+
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.dragged {
+    background-color: red;
+}
+
+.drop-target {
+    display: block;
+    float: left;
+
+    padding: 0;
+    margin: 0;
+    margin-left: 100px;
+    border: 3px solid orange;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.sorted-box-list {
+    padding: 0;
+    margin: 5px;
+    border: 2px solid orange;
+
+    width: fit-content;
+    height: fit-content;
+
+    list-style-type: none;
+}
+
+.sorted-box-list li {
+    padding: 0;
+    margin: auto;
+    border: 2px solid orange;
+
+    width: 300px;
+    height: 50px;
+}

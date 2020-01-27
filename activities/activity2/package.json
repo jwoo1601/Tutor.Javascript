@@ -1,0 +1,16 @@
+{
+  "name": "activity2",
+  "version": "1.0.0",
+  "description": "Activity2 Example Code",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js --no-show-devtools"
+  },
+  "author": "Jeongwoo Kim",
+  "license": "ISC",
+  "devDependencies": {
+    "digest-code-html-sandbox": "file:../../scripts/digest-code-html-sandbox"
+  },
+  "dependencies": {},
+  "keywords": []
+}

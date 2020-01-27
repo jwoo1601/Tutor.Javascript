@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./dropdown.css" />
+        <link rel="stylesheet" type="text/css" href="./drag-and-drop.css" />
+        <title>Activity2: Dropdown & Drag-and-Drop</title>
+    </head>
+    <body>
+        <ul class="box-list">
+            <li>
+                <div id="drag-box1" class="drag-box" draggable="true">Box1</div>
+            </li>
+            <li>
+                <div id="drag-box2" class="drag-box" draggable="true">Box2</div>
+            </li>
+            <li>
+                <div id="drag-box3" class="drag-box" draggable="true">Box3</div>
+            </li>
+            <li>
+                <div id="drag-box4" class="drag-box" draggable="true">Box4</div>
+            </li>
+        </ul>
+
+        <div class="drop-target">
+            <ul class="sorted-box-list">
+                <li class="box-area"></li>
+                <li class="box-area"></li>
+                <li class="box-area"></li>
+                <li class="box-area"></li>
+            </ul>
+        </div>
+
+        <script src="../drag-and-drop.js"></script>
+    </body>
+</html>
