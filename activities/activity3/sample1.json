@@ -1,0 +1,188 @@
+[
+    {
+        "teamId": 1232332,
+        "teamName": "pluto",
+        "createdAt": "2018/03/21",
+        "allowNewMember": true,
+        "members": [
+            {
+                "name": "Samuel Smith",
+                "gender": "male",
+                "age": 34,
+                "job": "office worker",
+                "salary": 34000
+            },
+            {
+                "name": "Lily May",
+                "gender": "female",
+                "age": 28,
+                "job": "waitress",
+                "salary": 39000
+            },
+            {
+                "name": "Karl East",
+                "gender": "male",
+                "age": 25,
+                "job": "part-time worker",
+                "salary": 28000
+            },
+            {
+                "name": "Jack West",
+                "gender": "male",
+                "age": 41,
+                "job": "office worker",
+                "salary": 54000
+            },
+            {
+                "name": "Mary B.",
+                "gender": "female",
+                "age": 29,
+                "job": "office worker",
+                "salary": 36500
+            }
+        ]
+    },
+    {
+        "teamId": 1544311,
+        "teamName": "mars",
+        "createdAt": "2016/02/04",
+        "allowNewMember": true,
+        "members": [
+            {
+                "name": "Sam K.",
+                "gender": "male",
+                "age": 26,
+                "job": "part-time worker",
+                "salary": 23000
+            },
+            {
+                "name": "Mareen S.",
+                "gender": "female",
+                "age": 38,
+                "job": "fire fighter",
+                "salary": 52000
+            },
+            {
+                "name": "Ken J.",
+                "gender": "male",
+                "age": 41,
+                "job": "police officer",
+                "salary": 49000
+            },
+            {
+                "name": "Laura A.",
+                "gender": "female",
+                "age": 33,
+                "job": "office worker",
+                "salary": 54000
+            },
+            {
+                "name": "Dua L.",
+                "gender": "female",
+                "age": 36,
+                "job": "singer",
+                "salary": 60000
+            }
+        ]
+    },
+    {
+        "teamId": 1001093,
+        "teamName": "venus",
+        "createdAt": "2014/02/04",
+        "allowNewMember": false,
+        "members": [
+            {
+                "name": "Jenny C.",
+                "gender": "female",
+                "age": 52,
+                "job": "office worker",
+                "salary": 80000
+            }
+        ]
+    },
+    {
+        "teamId": 1222016,
+        "teamName": "mercury",
+        "createdAt": "2019/08/22",
+        "allowNewMember": false,
+        "members": [ ]
+    },
+    {
+        "teamId": 1345606,
+        "teamName": "saturn",
+        "createdAt": "2020/01/10",
+        "allowNewMember": false
+    },
+    {
+        "teamId": 3244881,
+        "teamName": "neptune",
+        "createdAt": "2015/06/15",
+        "allowNewMember": true,
+        "members": [
+            {
+                "name": "Sam F.",
+                "gender": "male",
+                "age": 33,
+                "job": "programmer",
+                "salary": 56000
+            },
+            {
+                "name": "Jane C.",
+                "gender": "female",
+                "age": 35,
+                "job": "UI/UX designer",
+                "salary": 42000
+            },
+            {
+                "name": "Simon J.",
+                "gender": "male",
+                "age": 31,
+                "job": "part-time worker",
+                "salary": 29500
+            },
+            {
+                "name": "Matt L.",
+                "gender": "male",
+                "age": 28,
+                "job": "construction worker",
+                "salary": 50100
+            },
+            {
+                "name": "Liam N.",
+                "gender": "male",
+                "age": 51,
+                "job": "office worker",
+                "salary": 71000
+            }
+        ]
+    },
+    {
+        "teamId": 4003251,
+        "teamName": "neptune2",
+        "createdAt": "2011/12/30",
+        "allowNewMember": false,
+        "members": [
+            {
+                "name": "Karen K.",
+                "gender": "female",
+                "age": 31,
+                "job": "part-time worker",
+                "salary": 32100
+            },
+            {
+                "name": "Max D.",
+                "gender": "male",
+                "age": 37,
+                "job": "UI/UX designer",
+                "salary": 49500
+            },
+            {
+                "name": "Mark C.",
+                "gender": "male",
+                "age": 46,
+                "job": "programmer",
+                "salary": 72000
+            }
+        ]
+    }
+]
